@@ -23,32 +23,37 @@ The system analyzes user ratings, computes similarity between users with **cosin
 ---
 
 ## 📂 Project Structure
- Multi-Language-Movie-Recommendation-System/
- │── app.py
- │── hindirecommender.py
- │── telgue_movie_recommender.py
- │── english_movie_recommender.py
- │── requirements.txt
- │── README.md
- │── datasets/
- │   ├── hindi_movies_dataset.csv
- │   ├── hindi_user_ratings_dataset.csv
- │   ├── telugu_movies_dataset.csv
- │   ├── telugu_user_ratings_dataset.csv
- │   ├── english_movies_dataset.csv
- │   ├── english_user_ratings_dataset.csv
- │── templates/
-    ├── index.html
-    ├── filters.html
-    ├── recommendation.html
- ├──static/      #some movies poster for design
+  Multi-Language-Movie-Recommendation-System/
+  │── app.py
+  │── hindirecommender.py
+  │── telgue_movie_recommender.py
+  │── english_movie_recommender.py
+  │── requirements.txt
+  │── README.md
+  │── datasets/
+  │   ├── hindi_movies_dataset.csv
+  │   ├── hindi_user_ratings_dataset.csv
+  │   ├── telugu_movies_dataset.csv
+  │   ├── telugu_user_ratings_dataset.csv
+  │   ├── english_movies_dataset.csv
+  │   ├── english_user_ratings_dataset.csv
+  │── templates/
+               ├── index.html
+               ├── filters.html
+               ├── recommendation.html
+  ├──static/      #some movies poster for design
 
 
-##How It Works :
-1. Loads movie and ratings datasets for each language.  
-2. Builds a user-item matrix and computes cosine similarity between users.  
-3. Identifies similar users and generates recommendations.  
-4. Applies filters (genre & rating) to refine results.  
-5. Displays top n movie recommendations via a web interface.
+
+---
+
+## ⚡ How It Works
+1. Loads **movie and ratings datasets** for each language.  
+2. Builds a **user-item matrix** and computes **cosine similarity** between users.  
+3. Identifies **similar users** and generates recommendations.  
+4. Applies **filters (genre & rating)** to refine results.  
+5. Displays **Top-N movie recommendations** via a **web interface**.  
+
+---
 
 
