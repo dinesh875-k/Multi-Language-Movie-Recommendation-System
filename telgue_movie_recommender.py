@@ -2,8 +2,8 @@ import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 
 # loading datasets
-movies = pd.read_csv("C:\\Users\\hp\\Desktop\\projects\\movierecommender\\telgue datasets\\corrected_150_telugu_movies_dataset.csv")
-ratings = pd.read_csv("C:\\Users\\hp\\Desktop\\projects\\movierecommender\\telgue datasets\\corrected_150_telugu_user_ratings_dataset.csv")
+movies = pd.read_csv("C:\\Users\\hp\\Desktop\\projects\\movierecommender\\telgue datasets\\telugu_movies_dataset.csv")
+ratings = pd.read_csv("C:\\Users\\hp\\Desktop\\projects\\movierecommender\\telgue datasets\\telugu_user_ratings_dataset.csv")
 
 # building user-item matrix
 user_item_matrix = ratings.pivot(index="user_id", columns="movie_id", values="user_rating").fillna(0)
