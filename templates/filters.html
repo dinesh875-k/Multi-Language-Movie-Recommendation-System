@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Choose Filters</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #111;
+      overflow: hidden;
+      color: #fff;
+    }
+
+    /* Background video */
+    #bg-video {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -2;
+      object-fit: cover;
+      filter: brightness(30%) blur(2px);
+    }
+
+    .video-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: -1;
+    }
+
+    /* Glass card with neon border */
+    .glass-card {
+      position: relative;
+      background: rgba(0,0,0,0.55);
+      border-radius: 20px;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.7);
+      padding: 40px;
+      transform-style: preserve-3d;
+      transition: transform 0.2s ease-out;
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .glass-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      padding: 2px;
+      background: linear-gradient(135deg, #ff4757, #ff6b81, #ffa502, #1e90ff, #2ed573);
+      background-size: 300% 300%;
+      animation: glowing 6s linear infinite;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    @keyframes glowing {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h2, label {
+      text-shadow: 0 0 12px rgba(255,255,255,0.9), 0 0 25px rgba(0,0,0,0.9);
+    }
+
+    /* Posters around container */
+    .poster {
+      position: absolute;
+      width: 120px;
+      height: 160px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 15px 25px rgba(0,0,0,0.8), 0 0 20px rgba(255,255,255,0.4);
+      transition: transform 0.8s ease, opacity 0.8s ease;
+    }
+
+    .poster img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Slight 3D tilt around */
+    .poster1 { top: 5%; left: 15%; transform: rotateY(-15deg) rotateX(5deg); }
+    .poster2 { top: 0; left: 50%; transform: translateX(-50%) rotateY(0deg) rotateX(5deg); }
+    .poster3 { top: 5%; right: 15%; transform: rotateY(15deg) rotateX(5deg); }
+    .poster4 { top: 40%; right: 0; transform: translateY(-50%) rotateY(25deg); }
+    .poster5 { bottom: 5%; right: 15%; transform: rotateY(15deg) rotateX(-5deg); }
+    .poster6 { bottom: 0; left: 50%; transform: translateX(-50%) rotateY(0deg) rotateX(-5deg); }
+    .poster7 { bottom: 5%; left: 15%; transform: rotateY(-15deg) rotateX(-5deg); }
+    .poster8 { top: 40%; left: 0; transform: translateY(-50%) rotateY(-25deg); }
+
+    /* Slide effects */
+    .slide-out-right { transform: translateX(200%) rotateY(20deg); opacity: 0; }
+    .slide-out-left  { transform: translateX(-200%) rotateY(-20deg); opacity: 0; }
+    .slide-out-top   { transform: translateY(-200%) rotateX(20deg); opacity: 0; }
+    .slide-out-bottom{ transform: translateY(200%) rotateX(-20deg); opacity: 0; }
+    .slide-in        { transform: scale(1.1); opacity: 1; box-shadow: 0 0 30px rgba(255,255,255,0.6); }
+
+    /* Form styling */
+    input[type="checkbox"] {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #ff4757;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 6px;
+    }
+
+    input[type="checkbox"]:checked {
+      background: #ff4757;
+      box-shadow: 0 0 10px #ff4757;
+    }
+
+    .form-control {
+      border-radius: 12px;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+
+    .form-control:focus {
+      box-shadow: 0 0 12px #1e90ff;
+      border-color: #1e90ff;
+    }
+
+    .btn-primary {
+      border: none;
+      padding: 14px;
+      font-size: 1.2rem;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #ff4757, #1e90ff);
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: 0 0 25px rgba(255,71,87,0.9), 0 0 40px rgba(30,144,255,0.8);
+    }
+  </style>
+</head>
+<body>
+  <!-- Posters around -->
+  <div class="poster poster1"><img src="/static/images/salaar.png" alt="Salaar"></div>
+  <div class="poster poster2"><img src="/static/images/pathaan.png" alt="Pathaan"></div>
+  <div class="poster poster3"><img src="/static/images/og.png" alt="OG"></div>
+  <div class="poster poster4"><img src="/static/images/iron.png" alt="Iron Man"></div>
+  <div class="poster poster5"><img src="/static/images/captian.png" alt="Captain"></div>
+  <div class="poster poster6"><img src="/static/images/paradise.jpg" alt="Paradise"></div>
+  <div class="poster poster7"><img src="/static/images/ranga.jpg" alt="Ranga"></div>
+  <div class="poster poster8"><img src="/static/images/Untitled.jpg" alt="Untitled"></div>
+
+  <!-- Background video -->
+  <video autoplay muted loop id="bg-video">
+    <source src="https://www.videvo.net/videvo_files/converted/2014_11/preview/CinemaScreen_1080p.mp453173.webm" type="video/webm">
+    <source src="https://www.videvo.net/videvo_files/converted/2014_11/preview/CinemaScreen_1080p.mp453173.mp4" type="video/mp4">
+  </video>
+  <div class="video-overlay"></div>
+
+  <!-- Main filter card -->
+  <div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="glass-card w-100" style="max-width: 650px;" id="card">
+      <h2 class="mb-4 text-center">🎭 Choose Your Preferences ({{ language | capitalize }})</h2>
+
+      <form method="post">
+        <!-- User ID input -->
+        <div class="mb-3">
+          <label for="user_id" class="form-label">User ID:</label>
+          <input type="text" id="user_id" name="user_id" class="form-control" placeholder="Enter your user ID (e.g., user_1)" required>
+        </div>
+
+        <!-- Genres selection -->
+        <div class="mb-3">
+          <label class="form-label">Select Genres:</label><br>
+          {% for g in ["Action", "Comedy", "Drama", "Horror", "Romance", "Thriller"] %}
+            <input type="checkbox" name="genres" value="{{ g }}"> {{ g }} &nbsp;
+          {% endfor %}
+        </div>
+
+        <!-- Minimum rating input -->
+        <div class="mb-3">
+          <label class="form-label">Minimum Rating:</label>
+          <input type="number" name="min_rating" class="form-control" placeholder="Min Rating (e.g., 0)" min="0" max="10" step="0.1" value="0">
+        </div>
+
+        <!-- Number of recommendations -->
+        <div class="mb-3">
+          <label class="form-label">Number of Recommendations:</label>
+          <input type="number" name="top_n" class="form-control" placeholder="Number of Recommendations" min="1" max="20" value="5" required>
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary w-100">⚡ Get Recommendations</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const posters = document.querySelectorAll(".poster img");
+
+    setInterval(() => {
+      let lastSrc = posters[posters.length - 1].src;
+
+      posters.forEach((p, i) => {
+        if (i % 4 === 0) p.parentElement.classList.add("slide-out-right");
+        else if (i % 4 === 1) p.parentElement.classList.add("slide-out-bottom");
+        else if (i % 4 === 2) p.parentElement.classList.add("slide-out-left");
+        else p.parentElement.classList.add("slide-out-top");
+      });
+
+      setTimeout(() => {
+        for (let i = posters.length - 1; i > 0; i--) {
+          posters[i].src = posters[i - 1].src;
+        }
+        posters[0].src = lastSrc;
+
+        posters.forEach(p => {
+          p.parentElement.classList.remove("slide-out-right", "slide-out-left", "slide-out-top", "slide-out-bottom");
+          p.parentElement.classList.add("slide-in");
+        });
+
+        setTimeout(() => {
+          posters.forEach(p => p.parentElement.classList.remove("slide-in"));
+        }, 800);
+      }, 800);
+    }, 5000);
+  </script>
+</body>
+</html>

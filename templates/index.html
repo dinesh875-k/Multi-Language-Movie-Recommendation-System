@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Recommender</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #111;
+      overflow: hidden;
+    }
+
+    .container {
+      background: rgba(40, 40, 40, 0.85);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+      text-align: center;
+      color: white;
+      width: 500px;
+      position: relative;
+      z-index: 10;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      color: #fff;
+      text-shadow: 0 0 15px #ff4d4d, 0 0 30px #ff9999;
+    }
+
+    p {
+      margin-bottom: 25px;
+      color: #ddd;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(255,255,255,0.8);
+    }
+
+    .hindi { background: #d32f2f; color: white; }
+    .telugu { background: #388e3c; color: white; }
+    .hollywood { background: #fbc02d; color: black; }
+
+    /* Posters fixed around container */
+    .poster {
+      position: absolute;
+      width: 120px;
+      height: 160px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 15px 25px rgba(0,0,0,0.8), 0 0 20px rgba(255,255,255,0.4);
+      transition: transform 0.8s ease, opacity 0.8s ease;
+    }
+
+    .poster img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+
+    /* Slight 3D tilt */
+    .poster1 { top: 5%; left: 15%; transform: rotateY(-15deg) rotateX(5deg); }
+    .poster2 { top: 0; left: 50%; transform: translateX(-50%) rotateY(0deg) rotateX(5deg); }
+    .poster3 { top: 5%; right: 15%; transform: rotateY(15deg) rotateX(5deg); }
+    .poster4 { top: 40%; right: 0; transform: translateY(-50%) rotateY(25deg); }
+    .poster5 { bottom: 5%; right: 15%; transform: rotateY(15deg) rotateX(-5deg); }
+    .poster6 { bottom: 0; left: 50%; transform: translateX(-50%) rotateY(0deg) rotateX(-5deg); }
+    .poster7 { bottom: 5%; left: 15%; transform: rotateY(-15deg) rotateX(-5deg); }
+    .poster8 { top: 40%; left: 0; transform: translateY(-50%) rotateY(-25deg); }
+
+    /* Sliding animations */
+    .slide-out-right { transform: translateX(200%) rotateY(20deg); opacity: 0; }
+    .slide-out-left { transform: translateX(-200%) rotateY(-20deg); opacity: 0; }
+    .slide-out-top { transform: translateY(-200%) rotateX(20deg); opacity: 0; }
+    .slide-out-bottom { transform: translateY(200%) rotateX(-20deg); opacity: 0; }
+
+    .slide-in {
+      transform: scale(1.1);
+      opacity: 1;
+      box-shadow: 0 0 30px rgba(255,255,255,0.6);
+    }
+  </style>
+</head>
+<body>
+  <!-- Posters around -->
+  <div class="poster poster1"><img src="/static/images/salaar.png"></div>
+  <div class="poster poster2"><img src="/static/images/pathaan.png"></div>
+  <div class="poster poster3"><img src="/static/images/og.png"></div>
+  <div class="poster poster4"><img src="/static/images/iron.png"></div>
+  <div class="poster poster5"><img src="/static/images/captian.png"></div>
+  <div class="poster poster6"><img src="/static/images/paradise.jpg"></div>
+  <div class="poster poster7"><img src="/static/images/ranga.jpg"></div>
+  <div class="poster poster8"><img src="/static/images/Untitled.jpg"></div>
+
+  <!-- Main container -->
+  <div class="container">
+    <h1>🎬 Welcome to Movie Recommender</h1>
+    <p>Select your preferred movie language to get started:</p>
+    <a href="/filters/hindi"><button class="btn hindi">Hindi Movies</button></a>
+    <a href="/filters/telugu"><button class="btn telugu">Telugu Movies</button></a>
+    <a href="/filters/hollywood"><button class="btn hollywood">Hollywood Movies</button></a>
+  </div>
+
+  <script>
+    const posters = document.querySelectorAll(".poster img");
+
+    setInterval(() => {
+      let lastSrc = posters[posters.length - 1].src;
+
+      // Add fancy direction-based animations
+      posters.forEach((p, i) => {
+        if (i % 4 === 0) p.parentElement.classList.add("slide-out-right");
+        else if (i % 4 === 1) p.parentElement.classList.add("slide-out-bottom");
+        else if (i % 4 === 2) p.parentElement.classList.add("slide-out-left");
+        else p.parentElement.classList.add("slide-out-top");
+      });
+
+      setTimeout(() => {
+        // Shift posters
+        for (let i = posters.length - 1; i > 0; i--) {
+          posters[i].src = posters[i - 1].src;
+        }
+        posters[0].src = lastSrc;
+
+        // Reset and add slide-in effect
+        posters.forEach(p => {
+          p.parentElement.classList.remove("slide-out-right","slide-out-left","slide-out-top","slide-out-bottom");
+          p.parentElement.classList.add("slide-in");
+        });
+
+        setTimeout(() => {
+          posters.forEach(p => p.parentElement.classList.remove("slide-in"));
+        }, 800);
+      }, 800);
+    }, 5000);
+  </script>
+</body>
+</html>
