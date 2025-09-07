@@ -17,21 +17,30 @@ Tech Stack:
 
 
 Project Structure:
-Multi-Language-Movie-Recommendation-System
-├── app.py                        # Flask app (main entry point)
-├── hindirecommender.py           # Hindi movie recommender logic
-├── telgue_movie_recommender.py   # Telugu movie recommender logic
-├── english_movie_recommender.py  # English movie recommender logic
-├── templates/index.html
-            /filter.html
-            /recommendation.html  # HTML templates (index, filters, recommendation)
-├── datasets/                     # Movie & ratings datasets (CSV files)
-├──static/                        #some movies poster for design
+Multi-Language-Movie-Recommendation-System/
+│── app.py
+│── hindirecommender.py
+│── telgue_movie_recommender.py
+│── english_movie_recommender.py
+│── requirements.txt
+│── README.md
+│── datasets/
+│   ├── hindi_movies_dataset.csv
+│   ├── hindi_user_ratings_dataset.csv
+│   ├── telugu_movies_dataset.csv
+│   ├── telugu_user_ratings_dataset.csv
+│   ├── english_movies_dataset.csv
+│   ├── english_user_ratings_dataset.csv
+│── templates/
+    ├── index.html
+    ├── filters.html
+    ├── recommendation.html
+├──static/      #some movies poster for design
 
 
 How It Works :
 1. Loads movie and ratings datasets for each language.  
-2. Builds a user-item matrix and computes **cosine similarity** between users.  
+2. Builds a user-item matrix and computes cosine similarity between users.  
 3. Identifies similar users and generates recommendations.  
 4. Applies filters (genre & rating) to refine results.  
 5. Displays top n movie recommendations via a web interface.
