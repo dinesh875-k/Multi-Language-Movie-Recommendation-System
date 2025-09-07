@@ -23,28 +23,26 @@ The system analyzes user ratings, computes similarity between users with **cosin
 ---
 
 ## 📂 Project Structure
-  Multi-Language-Movie-Recommendation-System/
-  │── app.py
-  │── hindirecommender.py
-  │── telgue_movie_recommender.py
-  │── english_movie_recommender.py
-  │── requirements.txt
-  │── README.md
-  │── datasets/
-  │   ├── hindi_movies_dataset.csv
-  │   ├── hindi_user_ratings_dataset.csv
-  │   ├── telugu_movies_dataset.csv
-  │   ├── telugu_user_ratings_dataset.csv
-  │   ├── english_movies_dataset.csv
-  │   ├── english_user_ratings_dataset.csv
-  │── templates/
-               ├── index.html
-               ├── filters.html
-               ├── recommendation.html
-  ├──static/      #some movies poster for design
-
-
-
+Multi-Language-Movie-Recommendation-System/
+│── app.py
+│── hindirecommender.py
+│── telgue_movie_recommender.py
+│── english_movie_recommender.py
+│── requirements.txt
+│── README.md
+│── datasets/
+│ ├── hindi_movies_dataset.csv
+│ ├── hindi_user_ratings_dataset.csv
+│ ├── telugu_movies_dataset.csv
+│ ├── telugu_user_ratings_dataset.csv
+│ ├── english_movies_dataset.csv
+│ ├── english_user_ratings_dataset.csv
+│── templates/
+│ ├── index.html
+│ ├── filters.html
+│ ├── recommendation.html
+├── static/ # some movie posters for design
+  
 ---
 
 ## ⚡ How It Works
