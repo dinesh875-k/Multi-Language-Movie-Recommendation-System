@@ -3,8 +3,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 
 # loading datasets
-movies = pd.read_csv("C:\\Users\\hp\\Desktop\\projects\\movierecommender\\hindi datasets\\corrected_150_hindi_movies_dataset.csv")
-ratings = pd.read_csv("C:\\Users\\hp\\Desktop\\projects\\movierecommender\\hindi datasets\\corrected_150_hindi_user_ratings_dataset.csv")
+movies = pd.read_csv("C:\\Users\\hp\\Desktop\\projects\\movierecommender\\hindi datasets\\hindi_movies_dataset.csv")
+ratings = pd.read_csv("C:\\Users\\hp\\Desktop\\projects\\movierecommender\\hindi datasets\\hindi_user_ratings_dataset.csv")
 
 # building user-item matrix
 user_item_matrix = ratings.pivot(index="user_id", columns="movie_id", values="user_rating").fillna(0)
