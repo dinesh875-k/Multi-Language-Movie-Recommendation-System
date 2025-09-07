@@ -2,7 +2,7 @@
 This project is a Flask-based web application that recommends movies in Hindi, Telugu, and English (Hollywood) using user-based collaborative filtering. The system analyzes user ratings, computes similarity between users with cosine similarity, and suggests personalized movies that match the user’s preferences.
 
 
-Features :
+##Features :
  1.Personalized recommendations for each user
  2.Supports Hindi, Telugu, and Hollywood (English) movies
  3.Filter recommendations by genre and minimum rating
@@ -10,14 +10,14 @@ Features :
  5.User-friendly display of top-N recommended movies
 
 
-Tech Stack :
+##Tech Stack :
  1.Backend: Python, Flask
  2.Machine Learning: Pandas, Scikit-learn (Cosine Similarity)
  3.Frontend: HTML, Jinja2 Templates
  4.Datasets: Custom curated datasets for Hindi, Telugu, and English movies
 
 
-Project Structure :
+##Project Structure :
  Multi-Language-Movie-Recommendation-System/
  │── app.py
  │── hindirecommender.py
@@ -39,7 +39,7 @@ Project Structure :
  ├──static/      #some movies poster for design
 
 
-How It Works :
+##How It Works :
 1. Loads movie and ratings datasets for each language.  
 2. Builds a user-item matrix and computes cosine similarity between users.  
 3. Identifies similar users and generates recommendations.  
